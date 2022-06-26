@@ -92,6 +92,10 @@ alias ll='ls -al'
 #alias la='ls -A'
 #alias l='ls -CF'
 
+alias vim='nvim'
+alias v='nvim'
+alias nv='nvim'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.

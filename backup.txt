@@ -1,0 +1,4 @@
+~/.bashrc
+~/.profile
+~/.config/nvim/init.vim
+

@@ -12,15 +12,20 @@ call plug#begin()
 	Plug 'tpope/vim-commentary'
 	Plug 'adelarsq/Vim-Autoclose'
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+	
 	" Dashboard is for whatever reason not working !
-	" Plug 'glepnir/dashboard-nvim'
-	" Plug 'https://github.com/junegunn/fzf.vim' " Fuzzy Finder, Needs Silversearcher-ag for :Ag
-	" Plug 'https://github.com/junegunn/fzf'
+	Plug 'glepnir/dashboard-nvim'
+	Plug 'https://github.com/junegunn/fzf.vim' " Fuzzy Finder, Needs Silversearcher-ag for :Ag
+	Plug 'https://github.com/junegunn/fzf'
 	
 " Colorschemes
 	Plug 'sainnhe/everforest'
 	Plug 'vim-airline/vim-airline-themes'
 call plug#end() 
+
+" Call lua config file
+
+lua require('config')
 
 " General Settings
 set number
@@ -54,6 +59,10 @@ nmap <F8> :TagbarToggle<CR>
 
 nnoremap <C-b> :TerminalVSplit bash<CR>
 
+" Highlight the 81st line 
+" highlight ColorColumn ctermbg=gray
+" set colorcolumn=81
+
 " Dashboard Settings
 "let g:dashboard_default_executive ='fzf'
 "let g:dashboard_custom_header = [
@@ -83,3 +92,4 @@ autocmd! User GoyoLeave Limelight!
 
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_guifg = 'DarkGray'
+

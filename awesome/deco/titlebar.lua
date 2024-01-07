@@ -24,9 +24,9 @@ client.connect_signal("request::titlebars", function(c)
 
 
     local top_titlebar = awful.titlebar(c, {
-        height    = 20,
-        size      = 35,
-        position  = "left",
+        height    = 10,
+        size      = 25,
+        position  = "top",
         bg_normal = color.background_dark,
         -- bg_normal = '#00001180',
         bg_focus  = color.background_dark,
@@ -53,13 +53,13 @@ client.connect_signal("request::titlebars", function(c)
                 awful.titlebar.widget.maximizedbutton(c),
                 awful.titlebar.widget.minimizebutton(c),
                 spacing = 0,
-                layout = wibox.layout.fixed.vertical()
+                layout = wibox.layout.fixed.horizontal()
             },
             widget = wibox.container.margin,
-            top = 2,
-            bottom = 0,
-            right = 6,
-            left = 3
+            top = 1,
+            bottom = 1,
+            right = 2,
+            left = 2
         },
         {
             -- Middle

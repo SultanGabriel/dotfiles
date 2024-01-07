@@ -15,7 +15,7 @@ local Item3 = apps.alacritty
 local Item4 = apps.vscode
 local Item5 = apps.androidStudio
 local Item6 = apps.discord
-local Item7 = null
+local Item7 = apps.obsidian
 local Item8 = null
 local Item9 = null
 local Item10 = null
@@ -133,7 +133,7 @@ dock:setup {
 			layout = wibox.container.place
 		},
 
-		Separator,
+		-- Separator,
 		vertical_separator,
 		Separator,
 

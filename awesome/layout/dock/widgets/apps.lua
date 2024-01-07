@@ -74,7 +74,8 @@ local apps = {
 	keepassxc = create_button('keepassxc.svg', 'keepassxc', 1, 1, 2, 2),
 	gpick = create_button('gpick.svg', 'gpick', 4, 0, 4, 4),
 	vscode = create_button('visual-studio-code.svg', 'code', 1, 1, 1, 1),
-	androidStudio = create_button('androidstudio.svg', 'alacritty',1,1,1,1)
+	androidStudio = create_button('androidstudio.svg', 'alacritty',1,1,1,1),
+	obsidian = create_button('obsidian.svg', 'snap run obsidian',1,1,1,1)
 }
 
 return apps

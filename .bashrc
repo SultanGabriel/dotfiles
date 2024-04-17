@@ -88,7 +88,7 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -l'
+alias ll='ls -al'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -98,6 +98,7 @@ alias COOCKEROO='cd /mnt/s/Coockeroo'
 alias AWSI='cd /mnt/s/AWSI'
 
 export COOCKEROO='root@92.38.162.85'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.

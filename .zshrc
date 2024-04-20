@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="candy"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -100,11 +100,20 @@ plugins=(web-search tmux git)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll="ls -al"
 alias cdv="cd /vault/"
-alias vim="nvim"
 alias v="nvim"
 alias nv="nvim" 
+
+alias RWTH='cd /mnt/s/RWTH/'
+alias COOCKEROO='cd /mnt/s/Coockeroo'
+alias AWSI='cd /mnt/s/AWSI'
+
+export COOCKEROO='root@92.38.162.85'
 
 # Open tmux on startup, requires tmux plugin
 ZSH_TMUX_AUTOSTART=true
 
 source $ZSH/oh-my-zsh.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

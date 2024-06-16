@@ -7,3 +7,6 @@
 -- })
 
 vim.opt.colorcolumn = "80"
+
+vim.g.python3_host_prog = '/mnt/c/ProgramData/chocolatey/bin/python3.12.exe'
+

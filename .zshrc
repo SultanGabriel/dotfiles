@@ -71,7 +71,7 @@ ZSH_THEME="candy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(web-search tmux git)
+plugins=(web-search tmux git ssh-agent)
 
 # User configuration
 
@@ -98,6 +98,7 @@ plugins=(web-search tmux git)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 alias ll="ls -al"
 alias cdv="cd /vault/"
 alias v="nvim"
@@ -108,6 +109,13 @@ alias COOCKEROO='cd /mnt/s/Coockeroo'
 alias AWSI='cd /mnt/s/AWSI'
 
 export COOCKEROO='root@92.38.162.85'
+export ZAP='root@92.42.46.23'
+export ZAPS='scheer@92.42.46.23 -p 6922'
+
+# Python WSL Aliases
+alias python="/mnt/c/ProgramData/chocolatey/bin/python3.12.exe"
+alias pip="/mnt/c/Python312/Scripts/pip3.12.exe"
+
 
 # Open tmux on startup, requires tmux plugin
 ZSH_TMUX_AUTOSTART=true

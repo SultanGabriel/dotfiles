@@ -75,7 +75,9 @@ local apps = {
 	gpick = create_button('gpick.svg', 'gpick', 4, 0, 4, 4),
 	vscode = create_button('visual-studio-code.svg', 'code', 1, 1, 1, 1),
 	androidStudio = create_button('androidstudio.svg', 'alacritty',1,1,1,1),
-	obsidian = create_button('obsidian.svg', 'snap run obsidian',1,1,1,1)
+	obsidian = create_button('obsidian.svg', 'snap run obsidian',1,1,1,1),
+  brave = create_button('brave.svg', 'snap run brave',1,1,1,1),
+  webstorm = create_button('webstorm.svg', 'snap run webstorm',1,1,1,1)
 }
 
 return apps

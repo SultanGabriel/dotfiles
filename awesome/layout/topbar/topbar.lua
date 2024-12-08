@@ -129,14 +129,14 @@ mywibox:setup {
 				separator,
 				top_left,
 				separator,
-				batteryarc_widget({
-					show_current_level = true,
-					arc_thickness = 3,
-					size = 26,
-					font = "CaskaydiaCove Nerd Font 10",
-					margins = 55,
-					timeout = 10,
-				}),
+				-- batteryarc_widget({
+				-- 	show_current_level = true,
+				-- 	arc_thickness = 3,
+				-- 	size = 26,
+				-- 	font = "CaskaydiaCove Nerd Font 10",
+				-- 	margins = 55,
+				-- 	timeout = 10,
+				-- }),
 
 				separator,
 			},

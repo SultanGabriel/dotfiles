@@ -10,13 +10,13 @@ local color = require("layout.dock.color")
 local Item1 = require("layout.dock.widgets.launcher")
 
 local apps = require("layout.dock.widgets.apps")
-local Item2 = apps.firefox
+local Item2 = apps.brave
 local Item3 = apps.alacritty
 local Item4 = apps.vscode
 local Item5 = apps.androidStudio
 local Item6 = apps.discord
 local Item7 = apps.obsidian
-local Item8 = null
+local Item8 = apps.webstorm
 local Item9 = null
 local Item10 = null
 local Item11 = null
@@ -35,8 +35,8 @@ local color_picker = apps.gpick
 --Separator line
 local vertical_separator = wibox.widget {
 	orientation = 'vertical',
-	forced_height = dpi(1.5),
-	forced_width = dpi(1.5),
+	forced_height = dpi(1),
+	forced_width = dpi(1),
 	span_ratio = 0.55,
 	widget = wibox.widget.separator,
 	color = "#a9b1d6",
@@ -45,8 +45,8 @@ local vertical_separator = wibox.widget {
 }
 
 --Separator
-local Separator = wibox.widget.textbox("   ")
-Separator.forced_height = dpi(60)
+local Separator = wibox.widget.textbox("  ")
+Separator.forced_height = dpi(45)
 
 local Separator2 = wibox.widget.textbox(" ")
 
@@ -57,7 +57,7 @@ local dock = awful.popup {
 	ontop = false,
 	bg = "#00000000",
 	visible = true,
-	maximum_height = dpi(60),
+	maximum_height = dpi(45),
 	placement = function(c)
 		awful.placement.bottom(c,
 			{ margins = { top = dpi(8), bottom = dpi(5), left = 0, right = 0 } })
@@ -66,7 +66,7 @@ local dock = awful.popup {
 }
 
 dock:struts {
-	bottom = dpi(64)
+	bottom = dpi(49)
 }
 
 dock:setup {

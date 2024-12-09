@@ -104,18 +104,44 @@ alias cdv="cd /vault/"
 alias v="nvim"
 alias nv="nvim" 
 
-alias RWTH='cd /mnt/s/RWTH/'
-alias COOCKEROO='cd /mnt/s/Coockeroo'
-alias AWSI='cd /mnt/s/AWSI'
+# Directories
 
+alias SULTAN='cd /mnt/c/Users/sulta/'
+
+export RWTH='cd /mnt/s/RWTH/'
+alias RWTH='cd $RWTH'
+alias COOCKEROO='cd /mnt/s/Coockeroo'
+export AWSI='cd /mnt/s/AWSI'
+alias AWSI='cd $AWSI'
+
+export ATM='/mnt/s/Games/ATM9Modpack'
+alias ATM='cd $ATM'
+
+export CC_SIM='/mnt/s/Programms/CraftOS-PC-Portable'
+alias CC_SIM='cd $CC_SIM'
+
+
+# Projects
+export PROJECTS="/mnt/s/Projects"
+alias P="cd $PROJECTS"
+
+# AWSI
+export POSSIBLE="/home/sultan/Downloads/nextcloud-docker-dev/workspace/server/apps-extra/awsitestapplication"
+alias POSSIBLE="cd $POSSIBLE"
+export UFE="/mnt/s/AWSI/CloudLab/UnifiedFrontends/"
+alias UFE="cd $UFE"
+
+# COOCKEROO
+
+# Server Aliases
 export COOCKEROO='root@92.38.162.85'
 export ZAP='root@92.42.46.23'
+export BigZAP='root@185.249.197.115'
 export ZAPS='scheer@92.42.46.23 -p 6922'
 
 # Python WSL Aliases
 alias python="/mnt/c/ProgramData/chocolatey/bin/python3.12.exe"
 alias pip="/mnt/c/Python312/Scripts/pip3.12.exe"
-
 
 # Open tmux on startup, requires tmux plugin
 ZSH_TMUX_AUTOSTART=true

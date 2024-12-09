@@ -50,3 +50,13 @@ lspconfig.clangd.setup {
   root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
 }
 
+lspconfig.angularls.setup {
+  on_attach = on_attach,
+  -- on_init = on_init,
+  capabilities = capabilities,
+}
+
+lspconfig.tsserver.setup {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities),
+  on_attach = on_attach,
+}

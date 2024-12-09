@@ -4,8 +4,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Theme handling library
 local beautiful = require("beautiful") -- for awesome.icon
 
-local M = {}                           -- menu
-local _M = {}                          -- module
+local M = {} -- menu
+local _M = {} -- module
 
 -- reading
 -- https://awesomewm.org/apidoc/popups%20and%20bars/awful.menu.html
@@ -30,11 +30,11 @@ M.awesome = {
 			hotkeys_popup.show_help(nil, awful.screen.focused())
 		end,
 	},
-	{ "Manual",          terminal .. " -e man awesome" },
-	{ "Edit config",     editor_cmd .. " " .. awesome.conffile },
-	{ "Terminal",        terminal },
+	{ "Manual", terminal .. " -e man awesome" },
+	{ "Edit config", editor_cmd .. " " .. awesome.conffile },
+	{ "Terminal", terminal },
 	{ "Shutdown/Logout", "oblogout" },
-	{ "Restart",         awesome.restart },
+	{ "Restart", awesome.restart },
 	{
 		"Quit",
 		function()
@@ -45,16 +45,16 @@ M.awesome = {
 
 M.favorite = {
 	{ "Screen Record", "vokoscreenNG" },
-	{ "Files",         "thunar" },
-	{ "VS Code",       "code" },
-	{ "Firefox",       "firefox",       awful.util.getdir("config") .. "/firefox.png" },
-	{ "GIMP",          "gimp" },
-	{ "KDEconnect",    "kdeconnect-app" },
+	{ "Files", "thunar" },
+	{ "VS Code", "code" },
+	{ "Firefox", "firefox", awful.util.getdir("config") .. "/firefox.png" },
+	{ "GIMP", "gimp" },
+	{ "KDEconnect", "kdeconnect-app" },
 }
 
 M.network_main = {
 	{ "wicd-curses", "wicd-curses" },
-	{ "wicd-gtk",    "wicd-gtk" },
+	{ "wicd-gtk", "wicd-gtk" },
 }
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -62,10 +62,10 @@ M.network_main = {
 function _M.get()
 	-- Main Menu
 	local menu_items = {
-		{ "Awesome",          M.awesome, beautiful.awesome_subicon },
-		{ "Open Terminal",    terminal },
+		{ "Awesome", M.awesome, beautiful.awesome_subicon },
+		{ "Open Terminal", terminal },
 		{ "Change Wallpaper", "nitrogen" },
-		{ "Favorite",         M.favorite },
+		{ "Favorite", M.favorite },
 	}
 
 	return menu_items

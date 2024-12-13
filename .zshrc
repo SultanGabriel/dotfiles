@@ -110,6 +110,7 @@ alias AWSI='cd /mnt/s/AWSI'
 
 export COOCKEROO='root@92.38.162.85'
 export ZAP='root@92.42.46.23'
+export BigZap='root@185.249.197.115'
 export ZAPS='scheer@92.42.46.23 -p 6922'
 
 # Python WSL Aliases

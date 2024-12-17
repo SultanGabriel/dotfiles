@@ -23,7 +23,7 @@ local dpi = require("beautiful").xresources.apply_dpi
 -- Add a titlebar
 client.connect_signal("request::titlebars", function(c)
    local titlebar = awful.titlebar(c, {
-      size = dpi(30)
+      size = dpi(24)
    })
 
    titlebar: setup {

@@ -26,6 +26,8 @@ local altkey = "Mod1"
 local keys = {}
 
 
+local wallpaper_switcher = require("components.wallpaper_switcher")
+
 -- ===================================================================
 -- Movement Functions (Called by some keybinds)
 -- ===================================================================
@@ -494,8 +496,12 @@ keys.globalkeys = gears.table.join(
       hotkeys_popup.show_help()
     end, 
     {description="Show Help", group="awesome"}
-  )
+  ),
 
+  -- Wallpaper switcher
+    awful.key({ modkey, "Shift" }, "w", function()
+        wallpaper_switcher.open()
+   end, {description = "open wallpaper switcher", group = "Wallpaper"})
 )
 
 
@@ -609,6 +615,7 @@ for i = 1, 9 do
       )
    )
 end
+
 
 
 

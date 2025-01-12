@@ -26,7 +26,57 @@ local wallpaper_dir = gears.filesystem.get_configuration_dir() .. "/wallpaper"
 local wallpaper = wallpaper_dir .. "/wallpaper.jpg"
 local blurred_wallpaper = wallpaper_dir .. "/blurredWallpaper.png"
 
-awful.spawn.with_shell("feh --bg-fill " .. wallpaper)
+-- File to save the selected wallpaper path
+local selected_wallpaper_file = gears.filesystem.get_configuration_dir() .. "/selected_wallpaper.txt"
+
+-- Load the saved wallpaper path or fallback to the default
+local function load_saved_wallpaper()
+   local file = io.open(selected_wallpaper_file, "r")
+   if file then
+      local path = file:read("*all")
+      file:close()
+      if gears.filesystem.file_readable(path) then
+         return path
+      end
+   end
+   return wallpaper
+end
+
+local function getBlurredPath(path)
+  local directory, filename = path:match("(.*/)([^/]+)$")
+  -- Append 'blurred/' to the directory path
+  local new_directory = directory .. "blurred/"
+
+  -- Combine the new directory and the filename
+  local new_path = new_directory .. filename
+
+  return new_path
+end
+
+local current_wallpaper = load_saved_wallpaper()
+blurred_wallpaper = getBlurredPath(current_wallpaper)
+
+-- Save the selected wallpaper to a file
+local function save_wallpaper(path)
+   local file = io.open(selected_wallpaper_file, "w")
+   if file then
+      file:write(path)
+      file:close()
+      current_wallpaper = path
+   else
+      naughty.notify({ preset = naughty.config.presets.critical, title = "Error", text = "Failed to save wallpaper!" })
+   end
+end
+
+-- Apply the wallpaper to all screens
+local function apply_wallpaper(path)
+   for s in screen do
+      gears.wallpaper.maximized(path, s, true)
+   end
+end
+
+-- Apply the current wallpaper on startup
+apply_wallpaper(current_wallpaper)
 
 --- Check if a file or directory exists in this path
 local function exists(file)
@@ -41,14 +91,15 @@ local function exists(file)
 end
 
 -- check if blurred wallpaper needs to be created
+blurred_wallpaper = getBlurredPath(current_wallpaper)
 if not exists(blurred_wallpaper) then
    naughty.notify({
       preset = naughty.config.presets.normal,
       title = "Wallpaper",
-      text = "Generating blurred wallpaper..."
+      text = "Generating blurred wallpaper... " ..blurred_wallpaper
    })
    -- uses image magick to create a blurred version of the wallpaper
-   awful.spawn.with_shell("convert -filter Gaussian -blur 0x30 " .. wallpaper .. " " .. blurred_wallpaper)
+   awful.spawn.with_shell("convert -filter Gaussian -blur 0x10 " .. wallpaper .. " " .. blurred_wallpaper)
 end
 
 
@@ -60,7 +111,7 @@ end
 -- changes to blurred wallpaper
 local function blur()
    if not is_blurred then
-      awful.spawn.with_shell("feh --bg-fill " .. blurred_wallpaper)
+       apply_wallpaper(blurred_wallpaper)
       is_blurred = true
    end
 end
@@ -68,7 +119,7 @@ end
 -- changes to normal wallpaper
 local function unblur()
    if is_blurred then
-      awful.spawn.with_shell("feh --bg-fill " .. wallpaper)
+       apply_wallpaper(current_wallpaper)
       is_blurred = false
    end
 end
@@ -99,3 +150,21 @@ client.connect_signal("unmanage", function(c)
    -- unblur if tag has no clients
    unblur()
 end)
+
+
+-- [NEW]
+-- Function to set a new wallpaper
+local function set_wallpaper(path)
+   save_wallpaper(path)
+   apply_wallpaper(path)
+   blurred_wallpaper = getBlurredPath(path)
+
+   if not exists(blurred_wallpaper) then
+     awful.spawn.with_shell("convert -filter Gaussian -blur 0x30 " .. path .. " " .. blurred_wallpaper)
+   end
+end
+
+return {
+   set_wallpaper = set_wallpaper
+}
+-- [END NEW]

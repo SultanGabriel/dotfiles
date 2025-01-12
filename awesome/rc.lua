@@ -30,7 +30,7 @@ apps = {
    network_manager = "", -- recommended: nm-connection-editor
    power_manager = "", -- recommended: xfce4-power-manager
    terminal = "alacritty",
-   launcher = "rofi -normal-window -modi drun -show drun -theme " .. theme_config_dir .. "rofi.rasi",
+   launcher = "rofi -normal-window  -show drun -file-browser-add-dir /snap/bin -theme " .. theme_config_dir .. "rofi.rasi",
    lock = "i3lock",
    screenshot = "scrot -e 'mv $f ~/Pictures/ 2>/dev/null'",
    filebrowser = "nautilus"
@@ -154,3 +154,14 @@ screen.connect_signal("property::geometry", awesome.restart)
 
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
+
+
+
+local naughty = require("naughty")
+-- Keybinding to open the wallpaper switcher
+awful.key({"Mod4", "Shift"}, "W", function()
+    naughty.notify({ title = "Keybinding", text = "Mod+Shift+W pressed" })
+
+    wallpaper_switcher.open()
+end, {description = "open wallpaper switcher", group = "Wallpaper"})
+

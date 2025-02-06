@@ -1,0 +1,5 @@
+
+
+
+tmuxinator 
+https://github.com/tmuxinator/tmuxinator?tab=readme-ov-file

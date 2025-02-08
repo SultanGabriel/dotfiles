@@ -131,6 +131,8 @@ alias POSSIBLE="cd $POSSIBLE"
 export UFE="/mnt/s/AWSI/CloudLab/UnifiedFrontends/"
 alias UFE="cd $UFE"
 
+alias CHROME_DEV="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe --user-data-dir='C://chrome-dev-disabled-security' --disable-web-security --disable-site-isolation-trials & disown"
+
 # COOCKEROO
 
 # Server Aliases
@@ -152,6 +154,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Cool aliases :)
+alias genpassw="cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1"
 
 
 # Load Angular CLI autocompletion.

@@ -16,7 +16,8 @@ local dpi = beautiful.xresources.apply_dpi
 local awful = require("awful")
 local gears = require("gears")
 
-local tag_list = require("widgets.tag-list")
+-- local tag_list = require("widgets.tag-list")
+-- local tag_list = require("widgets.tag-list-top")
 local separator = require("widgets.horizontal-separator")
 local folder = require("widgets.folder")
 
@@ -56,7 +57,7 @@ left_panel.create = function(s)
       {
          layout = wibox.layout.fixed.vertical,
          -- add taglist widget
-         tag_list.create(s),
+         -- tag_list.create(s),
          -- add folders widgets
          {
             separator,

@@ -103,15 +103,21 @@ alias ll="ls -al"
 alias cdv="cd /vault/"
 alias v="nvim"
 alias nv="nvim" 
+alias zath="zathura"
 
 alias RWTH='cd /mnt/s/RWTH/'
 alias COOCKEROO='cd /mnt/s/Coockeroo'
 alias AWSI='cd /mnt/s/AWSI'
 
 export COOCKEROO='root@92.38.162.85'
-export ZAP='root@92.42.46.23'
-export BigZap='root@185.249.197.115'
-export ZAPS='scheer@92.42.46.23 -p 6922'
+# export ZAP='root@92.42.46.23' # Not used anymore
+export BigZap='sultan@185.249.197.115'
+export BigZapIp='185.249.197.115'
+alias zappie="ssh -o ServerAliveInterval=60 $BigZap"
+
+export Micutzu='sultan@192.168.0.99'
+alias micutzu="ssh -o ServerAliveInterval=60 $Micutzu"
+# export ZAPS='scheer@92.42.46.23 -p 6922'
 
 # Python WSL Aliases
 alias python="/mnt/c/ProgramData/chocolatey/bin/python3.12.exe"

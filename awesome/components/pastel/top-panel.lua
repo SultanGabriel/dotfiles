@@ -17,6 +17,7 @@ local dpi = beautiful.xresources.apply_dpi
 
 -- import widgets
 local task_list = require("widgets.task-list")
+local tag_list = require("widgets.tag-list-top")
 
 -- define module table
 local top_panel = {}
@@ -49,6 +50,10 @@ top_panel.create = function(s)
 	panel:setup({
 		expand = "none",
 		layout = wibox.layout.align.horizontal,
+    
+         -- add taglist widget
+    -- tag_list.create(s),
+
 		task_list.create(s),
 		require("widgets.calendar").create(s),
 		{

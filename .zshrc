@@ -9,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="candy"
+ZSH_THEME="random"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -137,9 +137,14 @@ alias CHROME_DEV="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe --u
 
 # Server Aliases
 export COOCKEROO='root@92.38.162.85'
-export ZAP='root@92.42.46.23'
-export BigZAP='root@185.249.197.115'
-export ZAPS='scheer@92.42.46.23 -p 6922'
+export RBigZAP='root@185.249.197.115'
+export BigZAP='sultan@185.249.197.115'
+#export ZAPS='scheer@92.42.46.23 -p 6922'
+
+alias zappie="ssh -o ServerAliveInterval=60 $BigZap"
+
+export Micutzu='sultan@192.168.0.99'
+alias micutzu="ssh -o ServerAliveInterval=60 $Micutzu"
 
 # Python WSL Aliases
 alias python="/mnt/c/ProgramData/chocolatey/bin/python3.12.exe"

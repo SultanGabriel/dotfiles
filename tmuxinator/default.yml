@@ -1,0 +1,8 @@
+name: default
+root: ~/
+
+windows:
+  - dash:
+      layout: even-vertical
+      panes:
+        - ~/scripts/dashboard.sh

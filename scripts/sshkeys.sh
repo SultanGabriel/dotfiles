@@ -18,6 +18,12 @@ EXCLUDE_PATTERNS=(
 FZF_OPTS=(
   --multi
   --prompt='Select SSH keys to add: '
+  --tmux 60%
+  --border
+  --margin=1%,1%
+  --padding=2%
+
+  
   # --tmux-pane=up,50%
   --layout=reverse
   --info=inline

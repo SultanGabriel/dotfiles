@@ -78,7 +78,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(web-search tmux git ssh-agent)
+plugins=(web-search tmux git ssh-agent tmuxinator)
 
 # User configuration
 
@@ -102,11 +102,16 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+
+# ---- [ ---- My Very Helpful Functions ---- ] ----
+
+
 # ---- [ ---- My Very Cool Aliases ---- ] ----
 
 # -- { --- Chapter 1: General Aliases --- } --
-alias zshconfig="nvim ~/.zshrc"
-alias ssh-stop='ssh-add -D && eval "$(ssh-agent -k)" && echo "🔒 SSH keys removed and agent killed."'
+alias cfg="nvim ~/.zshrc"
+alias src="source ~/.zshrc"
+
 alias genpassw="cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1"
 
 alias ll="ls -al"
@@ -114,9 +119,12 @@ alias cdv="cd /vault/"
 alias v="nvim"
 alias nv="nvim" 
 
-alias sshkeys="~/Scripts/sshkeys.sh"
+alias sshkeys="~/scripts/sshkeys.sh"
+alias ssh-stop='ssh-add -D && eval "$(ssh-agent -k)" && echo "🔒 SSH keys removed and agent killed."'
 
 alias CHROME_DEV="/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe --user-data-dir='C://chrome-dev-disabled-security' --disable-web-security --disable-site-isolation-trials & disown"
+
+alias tmuxswitch="~/scripts/tmuxswitch.sh"
 
 # -- { --- Chapter 2: Directory Aliases --- } --
 
@@ -167,7 +175,10 @@ fi
 # --- [ --- ZSH CONFIGURATION --- ] ---
 
 # Open tmux on startup, requires tmux plugin
-ZSH_TMUX_AUTOSTART=true
+# ZSH_TMUX_AUTOSTART=true
+if [[ -z "$TMUX" && -z "$TMUXINATOR_PROJECT" ]]; then
+  tmuxinator start default
+fi
 
 source $ZSH/oh-my-zsh.sh
 

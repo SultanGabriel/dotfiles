@@ -83,6 +83,10 @@ local plugins = {
     lazy = false,
     branch = "harpoon2",
     opts = {},
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require "custom.configs.harpoon"
+    end,
   },
   {
     "folke/todo-comments.nvim",

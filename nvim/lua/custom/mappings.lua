@@ -78,8 +78,11 @@ M.harpoon = {
       end,
       "?? Navigate to file 4",
     },
+    -- ["<leader>hn"] = {}
   },
 }
+-- vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+-- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 
 M.diagnostics = {
   n = {

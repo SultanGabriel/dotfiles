@@ -167,10 +167,10 @@ alias micutzu="ssh -o ServerAliveInterval=60 $Micutzu"
 
 
 # --- { --- Chapter 4: WSL Aliases --- } ---
-if [ -d "/mnt/c/Python312" ]; then
-    alias python="/mnt/c/Python312/python.exe"
-    alias pip="/mnt/c/Python312/Scripts/pip.exe"
-fi
+# if [ -d "/mnt/c/Python312" ]; then
+#     alias python="/mnt/c/Python312/python.exe"
+#     alias pip="/mnt/c/Python312/Scripts/pip.exe"
+# fi
 
 # --- [ --- ZSH CONFIGURATION --- ] ---
 
@@ -192,9 +192,17 @@ export NVM_DIR="$HOME/.nvm"
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
+# Go
+export PATH=$PATH:/usr/local/go/bin
 
 # FZF 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# PyENV
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
 
 # --- [ --- END OF FILE --- ] ---
 

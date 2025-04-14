@@ -78,5 +78,5 @@ for key in $selected; do
   ssh-add "$key"
 done
 
-echo "All selected keys processed!"
+echo "Succesfully added the ssh key!"
 

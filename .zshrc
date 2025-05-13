@@ -159,6 +159,10 @@ alias UFE="cd $UFE"
 export COOCKEROO='root@92.38.162.85'
 export RBigZAP='root@185.249.197.115'
 export BigZAP='sultan@185.249.197.115'
+export RBiscuit='root@88.99.213.238'
+export Biscuit='sultan@88.99.213.238'
+
+alias biscuit="ssh -o ServerAliveInterval=60 $Biscuit"
 
 alias zappie="ssh -o ServerAliveInterval=60 $BigZAP"
 
@@ -206,3 +210,4 @@ eval "$(pyenv virtualenv-init -)"
 
 # --- [ --- END OF FILE --- ] ---
 
+export PATH=$PATH:$HOME/go/bin

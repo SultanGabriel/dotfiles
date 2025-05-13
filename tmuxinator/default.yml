@@ -2,7 +2,7 @@ name: default
 root: ~/
 
 windows:
-  - dash:
+  - Primary:
       layout: even-vertical
       panes:
         - ~/scripts/dashboard.sh

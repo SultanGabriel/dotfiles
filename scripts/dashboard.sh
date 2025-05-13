@@ -14,12 +14,12 @@ CURRENT_ICON="🌍"
 
 
 # --- System Info ---
-echo ""
-if command -v neofetch >/dev/null 2>&1; then
-neofetch
-else
-echo "🖥️  Host: $(hostname) | IP: $(hostname -I | awk '{print $1}')"
-fi
+# echo ""
+# if command -v neofetch >/dev/null 2>&1; then
+# neofetch
+# else
+# echo "🖥️  Host: $(hostname) | IP: $(hostname -I | awk '{print $1}')"
+# fi
 
 # # --- System Summary ---
 # echo ""

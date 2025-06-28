@@ -50,3 +50,36 @@ lspconfig.clangd.setup {
   root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
 }
 
+lspconfig.angularls.setup {
+  on_attach = on_attach,
+  -- on_init = on_init,
+  capabilities = capabilities,
+}
+
+lspconfig.tsserver.setup {
+  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities),
+  on_attach = on_attach,
+}
+-- TailwindCSS specific setup
+lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+-- YAML specific setup
+lspconfig.yamlls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+-- JSON specific setup (vscode-langservers-extracted provides this)
+lspconfig.jsonls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+-- Ruby Solargraph setup
+lspconfig.solargraph.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}

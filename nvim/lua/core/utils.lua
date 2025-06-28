@@ -1,6 +1,20 @@
 local M = {}
 local merge_tb = vim.tbl_deep_extend
 
+-- Dump table to string 
+-- function dump(o)
+--    if type(o) == 'table' then
+--       local s = '{ '
+--       for k,v in pairs(o) do
+--          if type(k) ~= 'number' then k = '"'..k..'"' end
+--          s = s .. '['..k..'] = ' .. dump(v) .. ','
+--       end
+--       return s .. '} '
+--    else
+--       return tostring(o)
+--    end
+-- end
+
 M.load_config = function()
   local config = require "core.default_config"
   local chadrc_path = vim.api.nvim_get_runtime_file("lua/custom/chadrc.lua", false)[1]

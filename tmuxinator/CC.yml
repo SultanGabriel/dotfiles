@@ -1,0 +1,11 @@
+name: sultanweb
+root: /mnt/s/Programms/CraftOS-PC-Portable/
+
+
+windows:
+  - editor:
+      layout: b66d,188x50,0,0{130x50,0,0,1,57x50,131,0[57x14,131,0,2,57x35,131,15,22]}
+      panes:
+        - cd ./dev
+        - 
+        - cd ./scripts

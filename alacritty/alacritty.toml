@@ -1,4 +1,10 @@
-[shell]
+#import = ["alacritty/themes/themes/blood_moon.toml"]
+# import = ["alacritty/themes/themes/paper_color_dark.toml"]
+[general]
+ #import = ["themes/themes/alabaster.toml"]
+import = ["themes/themes/paper_color_dark.toml"]
+
+[terminal.shell]
 args = ['--login']
 program = "/bin/zsh"
 
@@ -6,38 +12,23 @@ program = "/bin/zsh"
 style = "Beam"
 
 [font]
-size = 9.0
+size = 10.0
 
 [font.normal]
-# family = "RobotoMono Nerd Font"
+#family = "RobotoMono Nerd Font"
+# family = "RecMono Nerd Font"
+family = "ShureTechMono Nerd Font"
+# family = "Terminess Nerd Font"
 
 [window]
 startup_mode = "Windowed"
 dynamic_padding = true
-opacity = 1.0
+opacity = 0.90
 
 [window.padding]
-x = 6
-y = 0
+x = 2
+y = 2
 
-#[window.dimensions]
-#columns = 90
-#lines = 25
+[terminal]
 
-[colors.normal]
-black = "#21222c"
-red = "#ff5555"
-green = "#50fa7b"
-yellow = "#f1fa8c"
-blue = "#bd93f9"
-magenta = "#ff79c6"
-cyan = "#8be9fd"
-white = "#f8f8f2"
 
-[colors.primary]
-background = "#282a36"
-foreground = "#f8f8f2"
-
-[colors.cursor]
-text = "CellBackground"
-cursor = "CellForeground"

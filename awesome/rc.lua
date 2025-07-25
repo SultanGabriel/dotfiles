@@ -30,8 +30,9 @@ apps = {
    network_manager = "", -- recommended: nm-connection-editor
    power_manager = "", -- recommended: xfce4-power-manager
    terminal = "alacritty",
-   launcher = "rofi -normal-window  -show drun -file-browser-add-dir /snap/bin -theme " .. theme_config_dir .. "rofi.rasi",
    lock = "i3lock",
+   launcher = "rofi -normal-window -show drun " ..
+           "-theme " .. theme_config_dir .. "rofi.rasi",
    screenshot = "scrot -e 'mv $f ~/Pictures/ 2>/dev/null'",
    filebrowser = "nautilus"
 }--auto 

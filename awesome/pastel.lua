@@ -23,13 +23,15 @@ local pastel = {}
 
 pastel.initialize = function()
    -- Import components
-   require("components.pastel.wallpaper")
+   require("modules.wallpaper")
+
    require("components.exit-screen")
    require("components.volume-adjust")
 
    -- Import panels
    local left_panel = require("components.pastel.left-panel")
-   local top_panel = require("components.pastel.top-panel")
+   -- local top_panel = require("components.pastel.top-panel")
+   local top_panel = require("ui.components.topbar")
 
    -- Set up each screen (add tags & panels)
    awful.screen.connect_for_each_screen(function(s)

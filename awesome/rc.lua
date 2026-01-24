@@ -9,8 +9,9 @@
 -- Standard awesome libraries
 local gears = require("gears")
 local awful = require("awful")
+local radical = require("radical")
 
-
+--local wallpaper_picker = require("ui.components.wallpaper_picker")
 -- ===================================================================
 -- User Configuration
 -- ===================================================================
@@ -40,7 +41,7 @@ apps = {
 -- define wireless and ethernet interface names for the network widget
 -- use `ip link` command to determine these
 network_interfaces = {
-   wlan = 'wlp1s0',
+   -- wlan = 'wlp1s0',
    lan = 'enp1s0'
 }
 
@@ -48,7 +49,10 @@ network_interfaces = {
 local run_on_start_up = {
    "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
    "redshift",
-   "unclutter"
+   "unclutter",
+   "pgrep -f ulauncher-daemon > /dev/null || ulauncher --hide-window"
+   --"ulauncher --hide-winodw &"
+  -- "~/.xinitrc"
 }
 
 
@@ -90,9 +94,18 @@ awful.rules.rules = create_rules(keys.clientkeys, keys.clientbuttons)
 
 -- Define layouts
 awful.layout.layouts = {
-   awful.layout.suit.tile,
-   awful.layout.suit.floating,
-   awful.layout.suit.max,
+  awful.layout.suit.floating,
+  awful.layout.suit.tile,
+  awful.layout.suit.tile.left,
+  awful.layout.suit.tile.bottom,
+  awful.layout.suit.tile.top,
+  awful.layout.suit.fair,
+  awful.layout.suit.fair.horizontal,
+  -- awful.layout.suit.max
+  -- awful.layout.suit.max.fullscreen
+  -- awful.layout.suit.magnifier
+  awful.layout.suit.spiral,
+  awful.layout.suit.spiral.dwindle
 }
 
 -- remove gaps if layout is set to max
@@ -158,11 +171,5 @@ collectgarbage("setstepmul", 1000)
 
 
 
-local naughty = require("naughty")
+--local naughty = require("naughty")
 -- Keybinding to open the wallpaper switcher
-awful.key({"Mod4", "Shift"}, "W", function()
-    naughty.notify({ title = "Keybinding", text = "Mod+Shift+W pressed" })
-
-    wallpaper_switcher.open()
-end, {description = "open wallpaper switcher", group = "Wallpaper"})
-

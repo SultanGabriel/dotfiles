@@ -26,7 +26,7 @@ local altkey = "Mod1"
 local keys = {}
 
 
-local wallpaper_switcher = require("components.wallpaper_switcher")
+local wallpaper_picker = require("ui.components.wallpaper_picker")
 
 -- ===================================================================
 -- Movement Functions (Called by some keybinds)
@@ -152,6 +152,12 @@ keys.globalkeys = gears.table.join(
       end,
       {description = "application launcher", group = "launcher"}
    ),
+  awful.key({ modkey }, "p",
+    function()
+        require("ui.components.start-menu").open()
+    end,
+    { description = "open start menu", group = "launcher" }
+  ),
 
    -- =========================================
    -- FUNCTION KEYS
@@ -500,8 +506,12 @@ keys.globalkeys = gears.table.join(
 
   -- Wallpaper switcher
     awful.key({ modkey, "Shift" }, "w", function()
-        wallpaper_switcher.open()
+        wallpaper_picker.open()
    end, {description = "open wallpaper switcher", group = "Wallpaper"})
+
+   -- =========================================
+   -- Move window to screen FIXME sometime...
+   -- =========================================
 )
 
 
@@ -615,9 +625,6 @@ for i = 1, 9 do
       )
    )
 end
-
-
-
 
 
 return keys

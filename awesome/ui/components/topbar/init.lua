@@ -112,7 +112,7 @@ topbar.create = function(s)
     brightness_widget(brightness_widget_config),
     -- inner(network_widget()),
     -- inner(logout_menu_widget()),
-    inner(layout_box),
+    inner(layout_box.create(s)),
     layout = wibox.layout.fixed.horizontal,
     spacing = dpi(6),
   }
@@ -165,4 +165,3 @@ topbar.create = function(s)
 end
 
 return topbar
-

@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/snap/bin/:$PATH
+export PATH=/snap/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -194,20 +194,27 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+# source <(ng completion script)
 
 # Go
-export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:/usr/local/go/bin
 
 # FZF 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export PATH=$PATH:$HOME/go/bin
 
 # PyENV
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
+# export PATH="$HOME/.pyenv/bin:$PATH"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv virtualenv-init -)"
 
+# GO 
+export PATH=$PATH:/usr/local/go/bin
+
+# Esp 8266 Toolchain Shit
+alias get_lx106='export PATH="$PATH:$HOME/esp/xtensa-lx106-elf/bin"'
+alias ESP8266='export PATH="$PATH:$HOME/esp/xtensa-lx106-elf/bin"'
+ export IDF_PATH=$HOME/esp/ESP8266_RTOS_SDK
 
 # --- [ --- END OF FILE --- ] ---
 
-export PATH=$PATH:$HOME/go/bin

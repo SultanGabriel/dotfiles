@@ -86,7 +86,7 @@ top_panel.create = function(s)
 			require("widgets.network")(),
       logout_menu_widget(),
 			-- require("widgets.battery"),
-			wibox.layout.margin(require("widgets.layout-box"), dpi(5), dpi(5), dpi(5), dpi(5)),
+			wibox.layout.margin(require("widgets.layout-box").create(s), dpi(5), dpi(5), dpi(5), dpi(5)),
 		},
 	})
 

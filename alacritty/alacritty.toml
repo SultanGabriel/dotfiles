@@ -1,8 +1,10 @@
 #import = ["alacritty/themes/themes/blood_moon.toml"]
 # import = ["alacritty/themes/themes/paper_color_dark.toml"]
 [general]
- #import = ["themes/themes/alabaster.toml"]
-import = ["themes/themes/paper_color_dark.toml"]
+import = ["themes/themes/monokai_charcoal.toml"]
+#import = ["themes/themes/kanagawa_dragon.toml"]
+#import = ["themes/themes/gruber_darker.toml"]
+#import = ["themes/themes/paper_color_dark.toml"]
 
 [terminal.shell]
 args = ['--login']
@@ -12,13 +14,13 @@ program = "/bin/zsh"
 style = "Beam"
 
 [font]
-size = 10.0
+size = 11.0
 
 [font.normal]
 #family = "RobotoMono Nerd Font"
 # family = "RecMono Nerd Font"
-family = "ShureTechMono Nerd Font"
-# family = "Terminess Nerd Font"
+#family = "ShureTechMono Nerd Font"
+family = "Terminess Nerd Font"
 
 [window]
 startup_mode = "Windowed"

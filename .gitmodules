@@ -4,3 +4,6 @@
 [submodule "awesome/bling"]
 	path = awesome/libs/bling
 	url = https://github.com/BlingCorp/bling.git
+[submodule "awesome/libs/radical"]
+	path = awesome/libs/radical
+	url = https://github.com/Elv13/radical.git

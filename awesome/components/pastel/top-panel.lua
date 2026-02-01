@@ -27,10 +27,10 @@ local top_panel = {}
 -- Bar Creation
 -- ===================================================================
 
-local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
-local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+local ram_widget = require("libs.awesome-wm-widgets.ram-widget.ram-widget")
+local cpu_widget = require("libs.awesome-wm-widgets.cpu-widget.cpu-widget")
+local logout_menu_widget = require("libs.awesome-wm-widgets.logout-menu-widget.logout-menu")
+local volume_widget = require("libs.awesome-wm-widgets.volume-widget.volume")
 
 local cpu_widget_config = {
 	width = 70,

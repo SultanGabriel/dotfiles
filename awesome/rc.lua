@@ -5,6 +5,7 @@
 --      ██║  ██║╚███╔███╔╝███████╗███████║╚██████╔╝██║ ╚═╝ ██║███████╗
 --      ╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
 
+package.path = 'libs/awesome-wm-widgets/*;' .. package.path   
 
 -- Standard awesome libraries
 local gears = require("gears")
@@ -13,13 +14,35 @@ local awful = require("awful")
 -- FIXME Use sometime and remember that is has been moved to libs/
 -- local radical = require("radical")
 
-local bling = require("bling")
+local bling = require("libs.bling")
+
 
 --local wallpaper_picker = require("ui.components.wallpaper_picker")
 -- ===================================================================
 -- User Configuration
 -- ===================================================================
+local gfs = require("gears.filesystem")
+local cfg = gfs.get_configuration_dir()  -- usually ~/.config/awesome/
 
+-- helper: add multiple lua search patterns for a root dir
+local function add_lua_path(root)
+  local p = root
+  package.path = package.path
+    .. ";" .. p .. "?.lua"
+    .. ";" .. p .. "?/init.lua"
+    .. ";" .. p .. "?/?.lua"
+    .. ";" .. p .. "?/?/init.lua"
+end
+
+-- 1) your general libs folder
+add_lua_path(cfg .. "libs/")
+
+-- 2) the repo roots that expect to be "top-level" on the path
+add_lua_path(cfg .. "libs/awesome-wm-widgets/")
+
+-- optional: if radical or bling do weird path assumptions too
+add_lua_path(cfg .. "libs/radical/")
+add_lua_path(cfg .. "libs/bling/")
 
 local themes = {
    "pastel", -- 1

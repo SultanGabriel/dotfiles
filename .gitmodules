@@ -7,3 +7,6 @@
 [submodule "awesome/libs/radical"]
 	path = awesome/libs/radical
 	url = https://github.com/Elv13/radical.git
+[submodule "awesome/libs/awesome-wm-widgets"]
+	path = awesome/libs/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets.git

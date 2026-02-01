@@ -8,11 +8,11 @@ local dpi        = beautiful.xresources.apply_dpi
 local task_list  = require("widgets.task-list")
 local tag_list  = require("widgets.tag-list")
 local calendar   = require("widgets.calendar")
-local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local volume_widget      = require("awesome-wm-widgets.volume-widget.volume")
-local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+local ram_widget = require("libs.awesome-wm-widgets.ram-widget.ram-widget")
+local cpu_widget = require("libs.awesome-wm-widgets.cpu-widget.cpu-widget")
+local brightness_widget = require("libs.awesome-wm-widgets.brightness-widget.brightness")
+local volume_widget      = require("libs.awesome-wm-widgets.volume-widget.volume")
+local logout_menu_widget = require("libs.awesome-wm-widgets.logout-menu-widget.logout-menu")
 local network_widget     = require("widgets.network")
 local layout_box         = require("widgets.layout-box")
 
@@ -23,7 +23,7 @@ local cpu_widget_config = {
   color        = "#434c5e",
 }
 
-local brightness_widget_config = {
+local brightness_widget_config = { -- FIXME is this shit not working?
   program = "light",
   type = "arc",
   tooltip = true,

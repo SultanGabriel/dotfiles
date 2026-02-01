@@ -9,7 +9,9 @@
 -- Standard awesome libraries
 local gears = require("gears")
 local awful = require("awful")
-local radical = require("radical")
+
+-- FIXME Use sometime and remember that is has been moved to libs/
+-- local radical = require("radical")
 
 local bling = require("bling")
 
@@ -21,7 +23,6 @@ local bling = require("bling")
 
 local themes = {
    "pastel", -- 1
-   -- "mirage"  -- 2
 }
 
 -- change this number to use the corresponding theme

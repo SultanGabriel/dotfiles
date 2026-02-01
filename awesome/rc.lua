@@ -11,6 +11,8 @@ local gears = require("gears")
 local awful = require("awful")
 local radical = require("radical")
 
+local bling = require("bling")
+
 --local wallpaper_picker = require("ui.components.wallpaper_picker")
 -- ===================================================================
 -- User Configuration
@@ -19,7 +21,7 @@ local radical = require("radical")
 
 local themes = {
    "pastel", -- 1
-   "mirage"  -- 2
+   -- "mirage"  -- 2
 }
 
 -- change this number to use the corresponding theme
@@ -27,16 +29,18 @@ local theme = themes[1]
 local theme_config_dir = gears.filesystem.get_configuration_dir() .. "/configuration/" .. theme .. "/"
 
 -- define default apps (global variable so other components can access it)
+local rofi_dir="/home/sultan/.config/rofi/launchers/type-1"
+local rofi_theme="style-2"
+
 apps = {
-   network_manager = "", -- recommended: nm-connection-editor
+   network_manager = "", -- recommended: nm-connection-editor FIXME ??? interesting ?
    power_manager = "", -- recommended: xfce4-power-manager
    terminal = "alacritty",
    lock = "i3lock",
-   launcher = "rofi -normal-window -show drun " ..
-           "-theme " .. theme_config_dir .. "rofi.rasi",
+   launcher = "rofi -show drun -theme " .. rofi_dir .. "/" .. rofi_theme .. ".rasi",
    screenshot = "scrot -e 'mv $f ~/Pictures/ 2>/dev/null'",
    filebrowser = "nautilus"
-}--auto 
+}
 
 -- define wireless and ethernet interface names for the network widget
 -- use `ip link` command to determine these
@@ -47,12 +51,13 @@ network_interfaces = {
 
 -- List of apps to run on start-up
 local run_on_start_up = {
-   "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
-   "redshift",
-   "unclutter",
-   "pgrep -f ulauncher-daemon > /dev/null || ulauncher --hide-window"
+   -- "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
+   "picom --experimental-backends --config ~/.config/picom/picom.conf",
+   -- "redshift",
+   -- "unclutter",
+   -- "pgrep -f ulauncher-daemon > /dev/null || ulauncher --hide-window"
    --"ulauncher --hide-winodw &"
-  -- "~/.xinitrc"
+  "~/.xinit.sh" -- FIXME make this run automatically sometime
 }
 
 
@@ -82,6 +87,61 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. theme ..
 -- Initialize theme
 local selected_theme = require(theme)
 selected_theme.initialize()
+-- -- Custom Flash Focus (SIMPLE & ROBUST VERSION)
+-- local function flash_focus(c)
+--     if not c then return end
+--     if not c.valid then return end
+--
+--     -- Skip wenn window eh schon transparent ist
+--     local target_opacity = c.opacity or 1.0
+--     if target_opacity < 0.9 then return end
+--
+--     -- Flash settings
+--     local start_opacity = 0.5    -- Start bei 50%
+--     local step_size = 0.05       -- Erhöhe um 5% pro tick
+--     local tick_rate = 0.015      -- Alle 15ms (smooth)
+--
+--     c.opacity = start_opacity
+--
+--     local function fade_in()
+--         if not c.valid then return false end
+--
+--         c.opacity = c.opacity + step_size
+--
+--         if c.opacity >= target_opacity then
+--             c.opacity = target_opacity
+--             return false  -- stop timer
+--         end
+--
+--         return true  -- continue timer
+--     end
+--
+--     gears.timer.start_new(tick_rate, fade_in)
+-- end
+--
+-- -- Connect signal
+-- client.connect_signal("focus", flash_focus)
+-- FLASH FOCUS AKTIVIEREN
+--
+-- bling.module.flash_focus.enable {
+--     client_opacity = true,           -- ob opacity geändert wird
+--     opacity_step = 0.3,             -- wie schnell (höher = schneller)
+--     opacity_min = 0.4,               -- start opacity (niedriger = subtiler)
+-- }
+-- Window Switcher
+bling.signal.playerctl.enable()
+bling.widget.window_switcher.enable {
+    type = "thumbnail",  -- or "thumbnail", "titlebar"
+    hide_window_switcher_key = "Escape",
+    minimize_key = "n",
+    unminimize_key = "N",
+    kill_client_key = "q",
+    cycle_key = "Tab",
+    previous_key = "Left",
+    next_key = "Right",
+    vim_previous_key = "h",
+    vim_next_key = "l",
+}
 
 -- Import Keybinds
 local keys = require("keys")
@@ -100,12 +160,18 @@ awful.layout.layouts = {
   awful.layout.suit.tile.top,
   awful.layout.suit.fair,
   awful.layout.suit.fair.horizontal,
-  awful.layout.suit.floating,
-  awful.layout.suit.max,
-  awful.layout.suit.max.fullscreen,
-  awful.layout.suit.magnifier,
-  awful.layout.suit.spiral,
-  awful.layout.suit.spiral.dwindle
+  -- awful.layout.suit.max
+  -- awful.layout.suit.max.fullscreen
+  -- awful.layout.suit.magnifier
+  -- awful.layout.suit.floating,
+  -- awful.layout.suit.spiral,
+  -- awful.layout.suit.spiral.dwindle
+  bling.layout.mstab,
+  bling.layout.centered,
+  bling.layout.vertical,
+  bling.layout.horizontal,
+  bling.layout.equalarea,
+  bling.layout.deck
 }
 
 -- remove gaps if layout is set to max
@@ -173,3 +239,4 @@ collectgarbage("setstepmul", 1000)
 
 --local naughty = require("naughty")
 -- Keybinding to open the wallpaper switcher
+

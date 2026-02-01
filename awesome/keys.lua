@@ -96,6 +96,52 @@ local function raise_client()
    end
 end
 
+-- ========================================
+-- MULTI-MONITOR NAVIGATION (3 Screens)
+-- Y = Screen 1 (Left)
+-- X = Screen 3 (Center) 
+-- C = Screen 2 (Right)
+-- ========================================
+local function warp_mouse_to_screen(screen_idx)
+    local s = screen[screen_idx]
+    if s then
+        -- Fokussiere den Screen
+        awful.screen.focus(s)
+        
+        -- Bewege Maus zur Mitte
+        mouse.screen = s
+        local geo = s.geometry
+        mouse.coords({ 
+            x = geo.x + geo.width / 2, 
+            y = geo.y + geo.height / 2 
+        })
+        
+        -- Optional: Flash-Effekt (braucht bling)
+        -- bling.module.flash_focus.flashfocus(s)
+    end
+end
+
+local function move_client_to_screen(screen_idx)
+    local c = client.focus
+    if c then
+        -- Verschiebe Client
+        c:move_to_screen(screen_idx)
+        
+        -- Folge mit Maus + Focus
+        local s = screen[screen_idx]
+        awful.screen.focus(s)
+        mouse.screen = s
+        
+        -- Maus zum verschobenen Client
+        local geo = c:geometry()
+        mouse.coords({ 
+            x = geo.x + geo.width / 2, 
+            y = geo.y + geo.height / 2 
+        })
+    end
+end
+
+
 
 -- ===================================================================
 -- Mouse bindings
@@ -317,29 +363,86 @@ keys.globalkeys = gears.table.join(
    ),
 
    -- Focus client by index (cycle through clients)
-   awful.key({modkey}, "Tab",
-      function()
-         awful.client.focus.byidx(1)
-      end,
-      {description = "focus next by index", group = "client"}
-   ),
-   awful.key({modkey, "Shift"}, "Tab",
-      function()
-         awful.client.focus.byidx(-1)
-      end,
-      {description = "focus previous by index", group = "client"}
-   ),
+   -- awful.key({modkey}, "Tab",
+   --    function()
+   --       awful.client.focus.byidx(1)
+   --    end,
+   --    {description = "focus next by index", group = "client"}
+   -- ),
+   -- awful.key({modkey, "Shift"}, "Tab",
+   --    function()
+   --       awful.client.focus.byidx(-1)
+   --    end,
+   --    {description = "focus previous by index", group = "client"}
+   -- ),
+-- Window Switcher (bling)
+awful.key({modkey}, "Tab",
+   function()
+      awesome.emit_signal("bling::window_switcher::turn_on")
+   end,
+   {description = "window switcher", group = "client"}
+),
 
    -- =========================================
    -- SCREEN FOCUSING
    -- =========================================
 
    -- Focus screen by index (cycle through screens)
-   awful.key({modkey}, "s",
-      function()
-         awful.screen.focus_relative(1)
-      end
-   ),
+   -- awful.key({modkey}, "s",
+   --    function()
+   --       awful.screen.focus_relative(1)
+   --    end
+   -- ),
+-- ========================================
+-- MULTI-MONITOR NAVIGATION KEYBINDINGS
+-- ========================================
+
+-- Super + Y/X/C: Maus zu Screen 1/2/3
+awful.key({ modkey }, "y", 
+    function() warp_mouse_to_screen(1) end,
+    {description = "focus screen 1 (left)", group = "screen"}
+),
+
+awful.key({ modkey }, "x", 
+    function() warp_mouse_to_screen(3) end,
+    {description = "focus screen 3 (center)", group = "screen"}
+),
+
+awful.key({ modkey }, "c", 
+    function() warp_mouse_to_screen(2) end,
+    {description = "focus screen 2 (right)", group = "screen"}
+),
+
+-- Super + Shift + Y/X/C: Client zu Screen verschieben
+awful.key({ modkey, "Shift" }, "y", 
+    function() move_client_to_screen(1) end,
+    {description = "move client to screen 1", group = "client"}
+),
+
+awful.key({ modkey, "Shift" }, "x", 
+    function() move_client_to_screen(3) end,
+    {description = "move client to screen 2", group = "client"}
+),
+
+awful.key({ modkey, "Shift" }, "c", 
+    function() move_client_to_screen(2) end,
+    {description = "move client to screen 3", group = "client"}
+),
+
+-- Super + S: Behalten für Quick Cycle (als Backup)
+awful.key({ modkey }, "s",
+    function()
+        awful.screen.focus_relative(1)
+        -- Optional: Maus folgen lassen
+        local s = awful.screen.focused()
+        local geo = s.geometry
+        mouse.coords({ 
+            x = geo.x + geo.width / 2, 
+            y = geo.y + geo.height / 2 
+        })
+    end,
+    {description = "cycle screens", group = "screen"}
+),
 
    -- =========================================
    -- CLIENT RESIZING

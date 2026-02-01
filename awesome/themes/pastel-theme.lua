@@ -100,5 +100,29 @@ theme.layout_max = "~/.config/awesome/icons/layouts/maximized.png"
 
 theme.icon_theme = "Tela-dark"
 
--- return theme
+
+-- ===================================================================
+-- Flash Focus (bling) - Multi-Monitor optimiert
+-- ===================================================================
+theme.flash_focus_start_opacity = 0.4   -- Startopacity (niedriger = subtiler)
+theme.flash_focus_step = 0.04          -- Animationsgeschwindigkeit (höher = schneller)
+theme.flash_focus_color = "#A6E3A1"  -- sanftes grün
+-- mstab
+-- ===================================================================
+-- Layout (bling) - no idea i copied it from the wiki xd
+-- ===================================================================
+theme.mstab_bar_disable = false        -- disable the tabbar
+theme.mstab_bar_ontop = false          -- whether you want to allow the bar to be ontop of clients
+theme.mstab_dont_resize_slaves = false -- whether the tabbed stack windows should be smaller than the
+                                       -- currently focused stack window (set it to true if you use
+                                       -- transparent terminals. False if you use shadows on solid ones
+theme.mstab_bar_padding = "default"    -- how much padding there should be between clients and your tabbar
+                                       -- by default it will adjust based on your useless gaps.
+                                       -- If you want a custom value. Set it to the number of pixels (int)
+theme.mstab_border_radius = 0          -- border radius of the tabbar
+theme.mstab_bar_height = 40            -- height of the tabbar
+theme.mstab_tabbar_position = "top"    -- position of the tabbar (mstab currently does not support left,right)
+theme.mstab_tabbar_style = "default"   -- style of the tabbar ("default", "boxes" or "modern")
+                                       -- defaults to the tabbar_style so only change if you want a
+                                       -- different style for mstab and tabbed
 return theme

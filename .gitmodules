@@ -2,5 +2,5 @@
 	path = alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme.git
 [submodule "awesome/bling"]
-	path = awesome/bling
+	path = awesome/libs/bling
 	url = https://github.com/BlingCorp/bling.git

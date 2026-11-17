@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$HOME/scripts/sx_lib/init.sh"
+
+DB="${SX_DIR_DB:-$HOME/.config/sx-dir/dirs.csv}"
+
+if [[ ! -s "$DB" ]]; then
+    sx-log info "No directories saved"
+    exit 0
+fi
+
+if command -v column >/dev/null 2>&1; then
+    {
+        printf 'NAME,PATH\n'
+        cat "$DB"
+    } | column -t -s ','
+else
+    cat "$DB"
+fi

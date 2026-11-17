@@ -5,7 +5,7 @@
 --      ██║  ██║╚███╔███╔╝███████╗███████║╚██████╔╝██║ ╚═╝ ██║███████╗
 --      ╚═╝  ╚═╝ ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
 
-package.path = 'libs/awesome-wm-widgets/*;' .. package.path   
+-- package.path = 'libs/awesome-wm-widgets/*;' .. package.path   
 
 -- Standard awesome libraries
 local gears = require("gears")
@@ -41,8 +41,8 @@ add_lua_path(cfg .. "libs/")
 add_lua_path(cfg .. "libs/awesome-wm-widgets/")
 
 -- optional: if radical or bling do weird path assumptions too
-add_lua_path(cfg .. "libs/radical/")
-add_lua_path(cfg .. "libs/bling/")
+-- add_lua_path(cfg .. "libs/radical/")
+-- add_lua_path(cfg .. "libs/bling/")
 
 local themes = {
    "pastel", -- 1
@@ -76,12 +76,12 @@ network_interfaces = {
 -- List of apps to run on start-up
 local run_on_start_up = {
    -- "picom --experimental-backends --config " .. theme_config_dir .. "picom.conf",
-   "picom --experimental-backends --config ~/.config/picom/picom.conf",
+   "picom --config ~/.config/picom/picom.conf",
    -- "redshift",
    -- "unclutter",
    -- "pgrep -f ulauncher-daemon > /dev/null || ulauncher --hide-window"
    --"ulauncher --hide-winodw &"
-  "~/.xinit.sh" -- FIXME make this run automatically sometime
+  -- "~/.xinit.sh" -- FIXME make this run automatically sometime
 }
 
 
@@ -89,6 +89,13 @@ local run_on_start_up = {
 -- Initialization
 -- ===================================================================
 
+-- Import theme
+local beautiful = require("beautiful")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. theme .. "-theme.lua")
+
+-- Initialize theme
+local selected_theme = require(theme)
+selected_theme.initialize()
 
 -- Import notification appearance
 require("components.notifications")
@@ -104,13 +111,6 @@ for _, app in ipairs(run_on_start_up) do
    awful.spawn.with_shell(string.format("echo 'pgrep -u $USER -x %s > /dev/null || (%s)' | bash -", findme, app), false)
 end
 
--- Import theme
-local beautiful = require("beautiful")
-beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. theme .. "-theme.lua")
-
--- Initialize theme
-local selected_theme = require(theme)
-selected_theme.initialize()
 -- -- Custom Flash Focus (SIMPLE & ROBUST VERSION)
 -- local function flash_focus(c)
 --     if not c then return end
@@ -248,7 +248,7 @@ end)
 
 
 -- Reload config when screen geometry changes
-screen.connect_signal("property::geometry", awesome.restart)
+-- screen.connect_signal("property::geometry", awesome.restart)
 
 
 -- ===================================================================

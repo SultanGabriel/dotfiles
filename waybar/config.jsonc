@@ -1,0 +1,79 @@
+[
+    // ---------------------------------------------------------------
+    // Main / center monitor
+    // ---------------------------------------------------------------
+    {
+        "name": "main",
+
+        "layer": "top",
+        "position": "top",
+        "output": "DP-1",
+
+        "height": 16,
+        "exclusive": true,
+        "fixed-center": true,
+        "spacing": 0,
+
+        // Reload CSS automatically while we work on appearance.
+        "reload_style_on_change": true,
+
+        // Shared module definitions.
+        "include": "~/.config/waybar/modules.jsonc",
+
+        "modules-left": [
+            "hyprland/workspaces",
+            "custom/layout"
+        ],
+
+        "modules-center": [
+            "hyprland/window"
+        ],
+
+        "modules-right": [
+            "custom/sx",
+            "privacy",
+            "bluetooth",
+            "pulseaudio",
+            "tray",
+            "clock",
+            "custom/power"
+        ]
+    },
+
+    // ---------------------------------------------------------------
+    // Side monitors
+    // ---------------------------------------------------------------
+    {
+        "name": "side",
+
+        "layer": "top",
+        "position": "top",
+
+        "output": [
+            "DP-3",
+            "HDMI-A-1"
+        ],
+
+        "height": 34,
+        "exclusive": true,
+        "fixed-center": true,
+        "spacing": 0,
+
+        "reload_style_on_change": true,
+
+        "include": "~/.config/waybar/modules.jsonc",
+
+        "modules-left": [
+            "hyprland/workspaces",
+            "custom/layout"
+        ],
+
+        "modules-center": [
+            "hyprland/window"
+        ],
+
+        "modules-right": [
+            "clock"
+        ]
+    }
+]

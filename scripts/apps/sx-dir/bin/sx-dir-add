@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$HOME/scripts/sx_lib/init.sh"
+
+DB="${SX_DIR_DB:-$HOME/.config/sx-dir/dirs.csv}"
+
+name="${1:-}"
+path="${2:-$PWD}"
+
+if [[ -z "$name" ]]; then
+    sx-die "Usage: sx-dir-add <name> [directory]"
+fi
+
+if [[ "$name" == *","* ]]; then
+    sx-die "Directory name must not contain a comma"
+fi
+
+if [[ "$path" == *","* ]]; then
+    sx-die "Directory path must not contain a comma"
+fi
+
+if [[ ! -d "$path" ]]; then
+    sx-die "Directory does not exist: $path"
+fi
+
+path="$(cd "$path" && pwd -P)"
+
+sx-ensure-dir "$(dirname "$DB")"
+touch "$DB"
+
+tmp="$(mktemp "${DB}.tmp.XXXXXX")"
+trap 'rm -f "$tmp"' EXIT
+
+# Remove an existing entry with the same name.
+awk -F',' -v name="$name" '$1 != name' "$DB" > "$tmp"
+
+printf '%s,%s\n' "$name" "$path" >> "$tmp"
+
+mv "$tmp" "$DB"
+trap - EXIT
+
+sx-log ok "$name -> $path"

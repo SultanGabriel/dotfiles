@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$HOME/scripts/sx_lib/init.sh"
+
+DB="${SX_DIR_DB:-$HOME/.config/sx-dir/dirs.csv}"
+
+old_name="${1:-}"
+new_name="${2:-}"
+
+if [[ -z "$old_name" || -z "$new_name" ]]; then
+    sx-die "Usage: sx-dir-rename <old-name> <new-name>"
+fi
+
+if [[ "$new_name" == *","* ]]; then
+    sx-die "Directory name must not contain a comma"
+fi
+
+if [[ ! -f "$DB" ]]; then
+    sx-die "Directory database does not exist"
+fi
+
+if ! awk -F',' -v name="$old_name" '$1 == name { found = 1 } END { exit !found }' "$DB"; then
+    sx-die "Directory not found: $old_name"
+fi
+
+if awk -F',' -v name="$new_name" '$1 == name { found = 1 } END { exit !found }' "$DB"; then
+    sx-die "Directory name already exists: $new_name"
+fi
+
+tmp="$(mktemp "${DB}.tmp.XXXXXX")"
+trap 'rm -f "$tmp"' EXIT
+
+awk -F',' -v old="$old_name" -v new="$new_name" '
+BEGIN {
+    OFS=","
+}
+
+$1 == old {
+    $1 = new
+}
+
+{
+    print
+}
+' "$DB" > "$tmp"
+
+mv "$tmp" "$DB"
+trap - EXIT
+
+sx-log ok "$old_name -> $new_name"

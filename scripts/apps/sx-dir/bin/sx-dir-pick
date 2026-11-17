@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$HOME/scripts/sx_lib/init.sh"
+
+DB="${SX_DIR_DB:-$HOME/.config/sx-dir/dirs.csv}"
+
+sx-require fzf || exit 1
+
+sx-ensure-dir "$(dirname "$DB")"
+touch "$DB"
+
+CURRENT_DIR="$(pwd -P)"
+
+export DB
+export CURRENT_DIR
+
+build_list() {
+    awk -F',' -v home="$HOME" '
+    {
+        name = $1
+        real_path = $2
+        display_path = real_path
+
+        if (index(display_path, home) == 1) {
+            display_path = "~" substr(display_path, length(home) + 1)
+        }
+
+        # Fields:
+        # 1 = real bookmark name
+        # 2 = display name
+        # 3 = display path
+        # 4 = real path
+        printf "%s\t%s\t%s\t%s\n",
+            name,
+            name,
+            display_path,
+            real_path
+    }
+    ' "$DB"
+}
+
+export -f build_list
+
+FZF_OPTS=(
+    --prompt='Directory: '
+    --tmux=60%
+    --border
+    --margin=1%,1%
+    --padding=2%
+    --layout=reverse
+    --info=inline
+
+    # fzf input is TAB-separated, not CSV.
+    --delimiter=$'\t'
+
+    # Only show display name + pretty path.
+    # Fields 1 and 4 stay hidden.
+    --with-nth=2,3
+
+    --header='ENTER jump | CTRL-A add | CTRL-R rename | CTRL-D delete'
+    --header-first
+
+    --bind="ctrl-a:execute-silent(
+        bash -c '
+            printf \"Name for %s: \" \"\$CURRENT_DIR\" > /dev/tty
+            IFS= read -r name < /dev/tty
+
+            [[ -n \"\$name\" ]] || exit 0
+
+            sx-dir-add \"\$name\" \"\$CURRENT_DIR\" > /dev/tty
+        '
+    )+reload(bash -c build_list)"
+
+    --bind="ctrl-d:execute-silent(
+        bash -c '
+            name=\"\$1\"
+
+            [[ -n \"\$name\" ]] || exit 0
+
+            printf \"Delete %s? [y/N] \" \"\$name\" > /dev/tty
+            IFS= read -r answer < /dev/tty
+
+            case \"\$answer\" in
+                y|Y|yes|YES)
+                    sx-dir-remove \"\$name\" > /dev/tty
+                    ;;
+            esac
+        ' _ {1}
+    )+reload(bash -c build_list)"
+
+    --bind="ctrl-r:execute-silent(
+        bash -c '
+            old_name=\"\$1\"
+
+            [[ -n \"\$old_name\" ]] || exit 0
+
+            printf \"Rename %s to: \" \"\$old_name\" > /dev/tty
+            IFS= read -r new_name < /dev/tty
+
+            [[ -n \"\$new_name\" ]] || exit 0
+            [[ \"\$new_name\" != \"\$old_name\" ]] || exit 0
+
+            sx-dir-rename \"\$old_name\" \"\$new_name\" > /dev/tty
+        ' _ {1}
+    )+reload(bash -c build_list)"
+)
+
+selected="$(
+    build_list | fzf "${FZF_OPTS[@]}"
+)" || exit 1
+
+[[ -n "$selected" ]] || exit 1
+
+IFS=$'\t' read -r name _display_name _display_path path <<< "$selected"
+
+if [[ ! -d "$path" ]]; then
+    sx-log error "Directory no longer exists: $path" >&2
+    exit 1
+fi
+
+printf '%s\n' "$path"

@@ -1,0 +1,10 @@
+name: IPR1
+root: /home/sultan/git/RWTH_PR_1/
+
+
+windows:
+  - editor:
+      layout: ef24,187x49,0,0{126x49,0,0,22,60x49,127,0,31}
+      panes:
+        - nvim README.md
+        - 

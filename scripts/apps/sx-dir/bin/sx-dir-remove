@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$HOME/scripts/sx_lib/init.sh"
+
+DB="${SX_DIR_DB:-$HOME/.config/sx-dir/dirs.csv}"
+
+if [[ ! -s "$DB" ]]; then
+    sx-log info "No directories saved"
+    exit 0
+fi
+
+names=()
+
+if (( $# > 0 )); then
+    names=("$@")
+else
+    sx-require fzf || exit 1
+
+    FZF_OPTS=(
+        --multi
+        --prompt='Remove: '
+        --tmux=60%
+        --border
+        --margin=1%,1%
+        --padding=2%
+        --layout=reverse
+        --info=inline
+        --delimiter=','
+        --with-nth=1,2
+    )
+
+    selected="$(
+        fzf "${FZF_OPTS[@]}" < "$DB"
+    )" || exit 0
+
+    [[ -n "$selected" ]] || exit 0
+
+    while IFS=',' read -r name _; do
+        names+=("$name")
+    done <<< "$selected"
+fi
+
+tmp="$(mktemp "${DB}.tmp.XXXXXX")"
+work="$(mktemp "${DB}.work.XXXXXX")"
+
+trap 'rm -f "$tmp" "$work"' EXIT
+
+cp "$DB" "$work"
+
+for name in "${names[@]}"; do
+    if ! awk -F',' -v name="$name" '
+        $1 == name {
+            found = 1
+        }
+
+        END {
+            exit !found
+        }
+    ' "$work"; then
+        sx-log warn "Directory not found: $name"
+        continue
+    fi
+
+    awk -F',' -v name="$name" '$1 != name' "$work" > "$tmp"
+    mv "$tmp" "$work"
+
+    sx-log ok "Removed: $name"
+done
+
+mv "$work" "$DB"
+trap - EXIT
+
+rm -f "$tmp"

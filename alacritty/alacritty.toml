@@ -1,0 +1,6 @@
+[general]
+live_config_reload = true
+import = [
+    "~/.config/alacritty/cachyos.toml",
+    "~/.config/alacritty/sxltxn.toml",
+]

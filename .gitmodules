@@ -1,0 +1,12 @@
+[submodule "alacritty/themes"]
+	path = alacritty/themes
+	url = https://github.com/alacritty/alacritty-theme.git
+[submodule "awesome/bling"]
+	path = awesome/libs/bling
+	url = https://github.com/BlingCorp/bling.git
+[submodule "awesome/libs/radical"]
+	path = awesome/libs/radical
+	url = https://github.com/Elv13/radical.git
+[submodule "awesome/libs/awesome-wm-widgets"]
+	path = awesome/libs/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets.git

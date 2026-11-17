@@ -1,0 +1,41 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    //"source": "~/.config/fastfetch/logo_blackhole.txt"
+    "source": "~/.config/fastfetch/logo_girl.txt"
+  },
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "host",
+    "bios",
+    "bootmgr",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    //"display",
+    "de",
+    "wm",
+    "cursor",
+    "terminal",
+    //"terminalfont",
+    "separator",
+    "cpu",
+    "gpu",
+    "memory",
+    "swap",
+    "disk",
+    //"battery",
+    //"poweradapter",
+    "localip",
+    "separator",
+    "datetime",
+    "locale",
+    "users",
+    "break",
+    "colors"
+  ]
+}

@@ -1,0 +1,26 @@
+configuration {
+    show-icons: true;
+}
+
+window {
+    width: 700px;
+}
+
+listview {
+    lines: 8;
+    spacing: 8px;
+}
+
+element {
+    orientation: horizontal;
+    spacing: 12px;
+    padding: 8px;
+}
+
+element-icon {
+    size: 96px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}

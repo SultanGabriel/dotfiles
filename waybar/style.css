@@ -1,0 +1,292 @@
+/* ------------------------------------------------------------------
+ * Global
+ * ------------------------------------------------------------------ */
+
+* {
+    border: none;
+    border-radius: 0;
+
+    min-height: 0;
+
+    font-family: sans-serif;
+    font-size: 13px;
+
+    box-shadow: none;
+    text-shadow: none;
+}
+
+
+/* ------------------------------------------------------------------
+ * Bar
+ * ------------------------------------------------------------------ */
+
+window#waybar {
+    background: rgba(18, 20, 26, 0.94);
+    color: rgba(235, 238, 245, 1.0);
+}
+
+
+/* ------------------------------------------------------------------
+ * Workspaces
+ * ------------------------------------------------------------------ */
+
+#workspaces {
+    margin-left: 6px;
+}
+
+#workspaces button {
+    min-width: 12px;
+    margin: 4px 2px;
+    padding: 0 8px;
+    border-radius: 7px;
+
+    /* Non-empty, inactive workspace.
+     * A very subtle background tells us that windows live here.
+     */
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(180, 185, 195, 1.0);
+
+    transition: background-color 120ms ease,
+        color 120ms ease;
+}
+
+/* Persistent workspace with no windows.
+ * Keep it visible, but remove the occupied-workspace background.
+ */
+#workspaces button.empty {
+    background: transparent;
+    color: rgba(130, 135, 145, 1.0);
+}
+
+/* Workspace currently displayed on this monitor.
+ *
+ * .active  = active workspace on the focused monitor
+ * .visible = displayed workspace on another monitor
+ *
+ * Styling both means every monitor always shows which workspace
+ * it currently has selected.
+ */
+#workspaces button.active,
+#workspaces button.visible {
+    background: rgba(51, 204, 255, 0.18);
+    color: rgba(255, 255, 255, 1.0);
+}
+
+/* Slightly stronger indication for the actually focused monitor. */
+#workspaces button.active {
+    background: rgba(51, 204, 255, 0.28);
+}
+
+/* Hover is independent from workspace state. */
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 1.0);
+}
+
+/* Do not let hover erase the selected-workspace indication. */
+#workspaces button.active:hover,
+#workspaces button.visible:hover {
+    background: rgba(51, 204, 255, 0.34);
+}
+
+/* Urgent window. */
+#workspaces button.urgent {
+    background: rgba(255, 90, 90, 0.28);
+    color: rgba(255, 255, 255, 1.0);
+}
+/* #workspaces {
+    margin-left: 6px;
+}
+
+#workspaces button {
+    min-width: 16px;
+
+    margin: 2px 2px;
+    padding: 0 8px;
+
+    border-radius: 8px;
+
+    background: transparent;
+    color: rgba(180, 185, 195, 1.0);
+
+    transition:
+        background-color 120ms ease,
+        color 120ms ease;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 1.0);
+}
+
+#workspaces button.active {
+    background: rgba(51, 204, 255, 0.16);
+    color: rgba(255, 255, 255, 1.0);
+}
+
+#workspaces button.empty {
+    color: rgba(130, 135, 145, 1.0);
+}
+
+#workspaces button.urgent {
+    background: rgba(255, 90, 90, 0.25);
+    color: rgba(255, 255, 255, 1.0);
+} */
+
+
+/* ------------------------------------------------------------------
+ * Layout
+ * ------------------------------------------------------------------ */
+
+#custom-layout {
+    margin-left: 6px;
+    padding: 0 10px;
+
+    color: rgba(140, 210, 255, 1.0);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* ------------------------------------------------------------------
+ * Active window
+ * ------------------------------------------------------------------ */
+
+#window {
+    padding: 0 12px;
+
+    color: rgba(215, 218, 225, 1.0);
+}
+
+window#waybar.empty #window {
+    background: transparent;
+}
+
+
+/* ------------------------------------------------------------------
+ * Main monitor system modules
+ * ------------------------------------------------------------------ */
+
+#privacy,
+#bluetooth,
+#pulseaudio,
+#tray,
+#clock {
+    margin: 4px 2px;
+    padding: 0 9px;
+
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* ------------------------------------------------------------------
+ * Bluetooth
+ * ------------------------------------------------------------------ */
+
+#bluetooth.connected {
+    color: rgba(140, 210, 255, 1.0);
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    color: rgba(140, 145, 155, 1.0);
+}
+
+
+/* ------------------------------------------------------------------
+ * Audio
+ * ------------------------------------------------------------------ */
+
+#pulseaudio.muted {
+    color: rgba(160, 165, 175, 1.0);
+}
+
+
+/* ------------------------------------------------------------------
+ * Privacy
+ * ------------------------------------------------------------------ */
+
+#privacy-item {
+    color: rgba(255, 190, 100, 1.0);
+}
+
+
+/* ------------------------------------------------------------------
+ * Tray
+ * ------------------------------------------------------------------ */
+
+#tray {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+
+/* ------------------------------------------------------------------
+ * Clock
+ * ------------------------------------------------------------------ */
+
+#clock {
+    margin-right: 6px;
+
+    font-weight: 600;
+    font-feature-settings: "tnum";
+}
+
+
+/* ------------------------------------------------------------------
+ * Tooltips
+ * ------------------------------------------------------------------ */
+
+tooltip {
+    border-radius: 8px;
+
+    background: rgba(24, 26, 33, 0.98);
+    color: rgba(235, 238, 245, 1.0);
+}
+
+tooltip label {
+    padding: 6px;
+}
+
+
+#custom-power {
+    padding: 0 10px;
+    margin-left: 6px;
+
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* ------------------------------------------------------------------
+ * Custom Power 
+ * ------------------------------------------------------------------ */
+#custom-power:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ------------------------------------------------------------------
+ * Custom SX settings
+ * ------------------------------------------------------------------ */
+
+#custom-sx {
+    margin: 4px 2px;
+    padding: 0 9px;
+
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(140, 210, 255, 1.0);
+
+    font-weight: 600;
+
+    transition: background-color 120ms ease,
+        color 120ms ease;
+}
+
+#custom-sx:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 1.0);
+}

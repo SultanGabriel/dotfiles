@@ -1,0 +1,235 @@
+{
+    // ---------------------------------------------------------------
+    // Workspaces
+    // ---------------------------------------------------------------
+
+    "hyprland/workspaces": {
+        // Each bar only shows workspaces assigned to its own monitor.
+        "all-outputs": false,
+
+        // We declared all 15 workspaces persistent in Hyprland.
+        "persistent-only": true,
+
+        "sort-by": "number",
+
+        // Display our local number rather than the internal workspace ID.
+        "format": "{icon}",
+
+        "tooltip": false,
+
+        // Disable accidental workspace changes by scrolling over the bar.
+        "enable-bar-scroll": false,
+
+        // Keep a clicked workspace on its assigned monitor.
+        "move-to-monitor": false,
+        "on-click": "activate",
+
+        // Stable workspace ownership.
+        "persistent-workspaces": {
+            "1":  ["DP-3"],
+            "2":  ["DP-3"],
+            "3":  ["DP-3"],
+            "4":  ["DP-3"],
+            "5":  ["DP-3"],
+
+            "6":  ["DP-1"],
+            "7":  ["DP-1"],
+            "8":  ["DP-1"],
+            "9":  ["DP-1"],
+            "10": ["DP-1"],
+
+            "11": ["HDMI-A-1"],
+            "12": ["HDMI-A-1"],
+            "13": ["HDMI-A-1"],
+            "14": ["HDMI-A-1"],
+            "15": ["HDMI-A-1"]
+        },
+
+        // Translate internal IDs back into local 1-5 labels.
+        "format-icons": {
+            "1":  "1",
+            "2":  "2",
+            "3":  "3",
+            "4":  "4",
+            "5":  "5",
+
+            "6":  "1",
+            "7":  "2",
+            "8":  "3",
+            "9":  "4",
+            "10": "5",
+
+            "11": "1",
+            "12": "2",
+            "13": "3",
+            "14": "4",
+            "15": "5"
+        }
+    },
+
+
+    // ---------------------------------------------------------------
+    // Current layout
+    // ---------------------------------------------------------------
+
+    "custom/layout": {
+        "exec": "~/.config/hypr/scripts/waybar-layout.sh",
+
+        // Temporary polling until we implement our layout-switch binds.
+        // Later we'll replace this with an explicit Waybar signal.
+        "interval": 2,
+
+        "tooltip": false
+    },
+
+
+    // ---------------------------------------------------------------
+    // Active window
+    // ---------------------------------------------------------------
+
+    "hyprland/window": {
+        "format": "{title}",
+
+        // Each monitor displays its own active window rather than the
+        // globally focused window from another monitor.
+        "separate-outputs": true,
+
+        "max-length": 70,
+        "fallback": "",
+
+        // We'll decide on application icons later.
+        "icon": false
+    },
+
+
+    // ---------------------------------------------------------------
+    // Privacy indicators
+    // ---------------------------------------------------------------
+
+    "privacy": {
+        "icon-spacing": 6,
+        "icon-size": 18,
+
+        // Privacy items only become visible while the resource is active.
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true
+            },
+            {
+                "type": "location",
+                "tooltip": true
+            }
+        ],
+
+        "ignore-monitor": true
+    },
+
+
+    // ---------------------------------------------------------------
+    // Bluetooth
+    // ---------------------------------------------------------------
+
+    "bluetooth": {
+        // Keep the bar compact; detailed device information lives
+        // in the tooltip and KDE's Bluetooth management UI.
+        "format": "BT",
+        "format-disabled": "BT off",
+        "format-off": "BT off",
+        "format-on": "BT",
+        "format-connected": "BT {num_connections}",
+
+        // Left click opens the same Bluedevil configuration module
+        // that Plasma uses inside System Settings.
+        "on-click": "kcmshell6 kcm_bluetooth",
+
+        // Right click opens KDE's add-device wizard directly.
+        "on-click-right": "bluedevil-wizard",
+
+        "tooltip": true,
+
+        "tooltip-format": "{controller_alias}",
+        "tooltip-format-connected":
+            "{controller_alias}\n\n{device_enumerate}",
+
+        "tooltip-format-enumerate-connected":
+            "{device_alias}"
+    },
+
+    // ---------------------------------------------------------------
+    // Audio
+    // ---------------------------------------------------------------
+
+    "pulseaudio": {
+        // This module is only a client of the existing audio server.
+        "format": "VOL {volume}%",
+        "format-bluetooth": "BT VOL {volume}%",
+        "format-muted": "MUTED",
+
+        "scroll-step": 5,
+
+        "tooltip": true
+
+        // Later if we want:
+        // "on-click": "pavucontrol"
+    },
+
+
+    // ---------------------------------------------------------------
+    // System tray
+    // ---------------------------------------------------------------
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8,
+
+        // Don't clutter the tray with applications declaring themselves
+        // passive unless we discover one that we actually need.
+        "show-passive-items": false
+    },
+
+
+    // ---------------------------------------------------------------
+    // Clock
+    // ---------------------------------------------------------------
+
+    "clock": {
+        "interval": 60,
+
+        "format": "{:%H:%M}",
+
+        // Hover gives us a useful calendar without occupying bar space.
+        "tooltip-format": "<tt>{calendar}</tt>",
+
+        "calendar": {
+            "mode": "month",
+            "first-day-of-week": 1,
+            "iso8601": true
+        }
+    },
+
+    // ---------------------------------------------------------------
+    // Power Thingy
+    // ---------------------------------------------------------------
+
+    "custom/power": {
+        "format": "Power",
+        "tooltip": false,
+        "on-click": "~/.config/hypr/scripts/power-menu.sh"
+        // "on-click": "~/.config/hypr/scripts/rofi-power.sh"
+    },
+
+    // ---------------------------------------------------------------
+    // SX Hypr Settings
+    // ---------------------------------------------------------------
+    "custom/sx": {
+        "format": "SX",
+        "tooltip": true,
+        "tooltip-format": "SX desktop controls",
+        "on-click": "~/.config/hypr/scripts/sx-settings-open.sh"
+    }
+}

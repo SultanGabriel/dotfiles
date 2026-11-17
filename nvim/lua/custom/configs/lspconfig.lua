@@ -1,21 +1,49 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-local lspconfig = require "lspconfig"
+local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
-local servers = { "html", "cssls", "clangd", "bashls", "pylsp", "pyright" }
-
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+if ok then
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 end
 
--- Specific configurations for individual servers if needed
-lspconfig.pyright.setup {
-  on_attach = on_attach,
+-- ---------------------------------------------------------
+-- Shared configuration
+-- ---------------------------------------------------------
+
+local servers = {
+  "lua_ls",
+  "html",
+  "cssls",
+  "ts_ls",
+  "tailwindcss",
+  "bashls",
+  "pyright",
+  "clangd",
+  "yamlls",
+  "jsonls",
+  "astro",
+  "eslint",
+}
+
+-- Not installed unused yet
+local optional_servers = {
+  "angularls",
+  "solargraph", -- Ruby lol why was this in my config
+}
+
+for _, server in ipairs(servers) do
+  vim.lsp.config(server, {
+    capabilities = capabilities,
+  })
+end
+
+-- ---------------------------------------------------------
+-- Python
+-- ---------------------------------------------------------
+
+vim.lsp.config("pyright", {
   capabilities = capabilities,
+
   settings = {
     python = {
       analysis = {
@@ -24,62 +52,36 @@ lspconfig.pyright.setup {
       },
     },
   },
-}
+})
 
-lspconfig.pylsp.setup {
-  on_attach = on_attach,
+-- ---------------------------------------------------------
+-- C / C++
+-- ---------------------------------------------------------
+
+vim.lsp.config("clangd", {
   capabilities = capabilities,
-  settings = {
-    pylsp = {
-      plugins = {
-        pyflakes = { enabled = true },
-        pycodestyle = { enabled = true },
-        mccabe = { enabled = true },
-        pylsp_mypy = { enabled = true, live_mode = false },
-        pylsp_rope = { enabled = true },
-      },
-    },
+
+  cmd = {
+    "clangd",
+    "--background-index",
   },
-}
 
-lspconfig.clangd.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = { "clangd", "--background-index", "--suggest-missing-includes" },
-  filetypes = { "c", "cpp", "objc", "objcpp" },
-  root_dir = lspconfig.util.root_pattern("compile_commands.json", "compile_flags.txt", ".git"),
-}
+  filetypes = {
+    "c",
+    "cpp",
+    "objc",
+    "objcpp",
+  },
 
-lspconfig.angularls.setup {
-  on_attach = on_attach,
-  -- on_init = on_init,
-  capabilities = capabilities,
-}
+  root_markers = {
+    "compile_commands.json",
+    "compile_flags.txt",
+    ".git",
+  },
+})
 
-lspconfig.tsserver.setup {
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities),
-  on_attach = on_attach,
-}
--- TailwindCSS specific setup
-lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+-- ---------------------------------------------------------
+-- Enable
+-- ---------------------------------------------------------
 
--- YAML specific setup
-lspconfig.yamlls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- JSON specific setup (vscode-langservers-extracted provides this)
-lspconfig.jsonls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- Ruby Solargraph setup
-lspconfig.solargraph.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+vim.lsp.enable(servers)

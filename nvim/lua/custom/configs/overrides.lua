@@ -13,6 +13,7 @@ M.treesitter = {
     "markdown",
     "markdown_inline",
     "python",
+    "astro"
   },
   indent = {
     enable = true,
@@ -21,19 +22,24 @@ M.treesitter = {
 
 M.mason = {
   ensure_installed = {
+    -- LSP
     "lua-language-server",
-    "stylua",
-    "css-lsp",
     "html-lsp",
+    "css-lsp",
     "typescript-language-server",
-    "deno",
-    "prettier",
-    "clangd",
-    "clang-format",
+    "tailwindcss-language-server",
+    "bash-language-server",
     "pyright",
-    "pylsp",
+    "clangd",
+
+    -- Formatters
+    "stylua",
+    "prettier",
     "black",
-    "flake8",
+    "clang-format",
+
+    -- Linters
+    -- "flake8",
   },
 }
 

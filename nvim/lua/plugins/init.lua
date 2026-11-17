@@ -146,9 +146,11 @@ local default_plugins = {
       require("core.utils").lazy_load "nvim-lspconfig"
     end,
     config = function()
-      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
     end,
+
   },
+
 
   -- load luasnips + cmp related in insert mode only
   {

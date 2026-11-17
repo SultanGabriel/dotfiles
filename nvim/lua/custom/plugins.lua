@@ -10,14 +10,14 @@ local plugins = {
     dependencies = {
       -- format & linting
       {
-        "jose-elias-alvarez/null-ls.nvim",
+        "nvimtools/none-ls.nvim",
+
         config = function()
           require "custom.configs.null-ls"
         end,
       },
     },
     config = function()
-      require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
@@ -30,9 +30,9 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     opts = overrides.treesitter,
   },
-
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
@@ -69,15 +69,15 @@ local plugins = {
     "mg979/vim-visual-multi",
     lazy = false,
   },
-  {
-    "github/copilot.vim",
-    lazy = false,
-    config = function() -- Mapping tab wird bereits von NvChad verwendet
-      vim.g.copilot_no_tab_map = true
-      vim.g.copilot_assume_mapped = true
-      vim.g.copilot_tab_fallback = ""
-    end,
-  },
+  -- {
+  --   "github/copilot.vim",
+  --   lazy = false,
+  --   config = function() -- Mapping tab wird bereits von NvChad verwendet
+  --     vim.g.copilot_no_tab_map = true
+  --     vim.g.copilot_assume_mapped = true
+  --     vim.g.copilot_tab_fallback = ""
+  --   end,
+  -- },
   {
     "ThePrimeagen/harpoon",
     lazy = false,
